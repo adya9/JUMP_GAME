@@ -34,7 +34,30 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
+function startGame() {
+    document.querySelectorAll('.pipe_sprite').forEach((e) => {
+        e.remove();
+    });
+    img.style.display = 'block';
+    bird.style.top = '40vh';
+    game_state = 'Play';
+    message.innerHTML = '';
+    score_title.innerHTML = 'Score : ';
+    score_val.innerHTML = '0';
+    message.classList.remove('messageStyle');
+    play();
+}
 
+document.addEventListener('touchstart', function(event) {
+    startBackgroundAnimation();
+    startGame();
+   bird_dy = -7.6; // Apply upward force when screen is touched
+});
+
+// Adjust the bird's vertical position by tapping on the screen
+document.addEventListener('touchend', function(event) {
+    bird_dy = bird_dy + grativy; // Apply gravity when touch ends
+});
 document.addEventListener('keydown', (e) => {
     
     if(e.key == 'Enter' && game_state != 'Play'){
@@ -146,3 +169,7 @@ function play(){
     }
     requestAnimationFrame(create_pipe);
 }
+
+
+
+
